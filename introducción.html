@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Introducción al Análisis Exploratorio de Datos</title>
+  <meta name="description" content="Introducción al Análisis Exploratorio de Datos" />
+  <meta name="generator" content="bookdown 0.29 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="Introducción al Análisis Exploratorio de Datos" />
+  <meta property="og:type" content="book" />
+  
+  
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Introducción al Análisis Exploratorio de Datos" />
+  
+  
+  
+
+<meta name="author" content="DSLAB" />
+
+
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+
+<link rel="next" href="escalas-de-medida.html"/>
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+<link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
+<link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
+
+<script>
+document.write('<div class="logos"><img src="data:image/png;base64,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" width="100px" alt="logo" style="position:absolute; top:50px; right:1%; padding:10px;z-index:200;"/></div>')
+</script>
+
+
+
+<style type="text/css">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { color: #008000; } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { color: #008000; font-weight: bold; } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li class="chapter" data-level="1" data-path="introducción.html"><a href="introducción.html"><i class="fa fa-check"></i><b>1</b> Introducción</a>
+<ul>
+<li class="chapter" data-level="1.1" data-path="introducción.html"><a href="introducción.html#variables-cualitativas-y-cuantitativas"><i class="fa fa-check"></i><b>1.1</b> Variables cualitativas y cuantitativas</a></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="escalas-de-medida.html"><a href="escalas-de-medida.html"><i class="fa fa-check"></i><b>2</b> Escalas de medida</a>
+<ul>
+<li class="chapter" data-level="2.1" data-path="escalas-de-medida.html"><a href="escalas-de-medida.html#datos-de-sección-cruzada-series-temporales-y-paneles-de-datos"><i class="fa fa-check"></i><b>2.1</b> Datos de sección cruzada, series temporales y paneles de datos</a></li>
+<li class="chapter" data-level="2.2" data-path="escalas-de-medida.html"><a href="escalas-de-medida.html#tipos-de-variables-conclusiones"><i class="fa fa-check"></i><b>2.2</b> Tipos de variables: conclusiones</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="resumen-numérico-de-datos.html"><a href="resumen-numérico-de-datos.html"><i class="fa fa-check"></i><b>3</b> Resumen numérico de datos</a>
+<ul>
+<li class="chapter" data-level="3.1" data-path="resumen-numérico-de-datos.html"><a href="resumen-numérico-de-datos.html#paquetes-y-datasets"><i class="fa fa-check"></i><b>3.1</b> Paquetes y datasets</a></li>
+<li class="chapter" data-level="3.2" data-path="resumen-numérico-de-datos.html"><a href="resumen-numérico-de-datos.html#resumen-numérico-de-variables-cualitativas"><i class="fa fa-check"></i><b>3.2</b> Resumen numérico de variables cualitativas</a></li>
+<li class="chapter" data-level="3.3" data-path="resumen-numérico-de-datos.html"><a href="resumen-numérico-de-datos.html#resumen-numérico-de-variables-cuantitativas"><i class="fa fa-check"></i><b>3.3</b> Resumen numérico de variables cuantitativas</a>
+<ul>
+<li class="chapter" data-level="3.3.1" data-path="resumen-numérico-de-datos.html"><a href="resumen-numérico-de-datos.html#medidas-de-posición-centralidad"><i class="fa fa-check"></i><b>3.3.1</b> Medidas de posición (centralidad)</a></li>
+<li class="chapter" data-level="3.3.2" data-path="resumen-numérico-de-datos.html"><a href="resumen-numérico-de-datos.html#otras-medidas-de-posición"><i class="fa fa-check"></i><b>3.3.2</b> Otras medidas de posición</a></li>
+<li class="chapter" data-level="3.3.3" data-path="resumen-numérico-de-datos.html"><a href="resumen-numérico-de-datos.html#medidas-de-dispersión"><i class="fa fa-check"></i><b>3.3.3</b> Medidas de dispersión</a></li>
+<li class="chapter" data-level="3.3.4" data-path="resumen-numérico-de-datos.html"><a href="resumen-numérico-de-datos.html#medidas-de-forma"><i class="fa fa-check"></i><b>3.3.4</b> Medidas de forma</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="visualización-de-datos-para-eda.html"><a href="visualización-de-datos-para-eda.html"><i class="fa fa-check"></i><b>4</b> Visualización de datos para EDA</a>
+<ul>
+<li class="chapter" data-level="4.1" data-path="visualización-de-datos-para-eda.html"><a href="visualización-de-datos-para-eda.html#gráficos-para-eda-con-variables-cualitativas-individuales"><i class="fa fa-check"></i><b>4.1</b> Gráficos para EDA con variables cualitativas individuales</a></li>
+<li class="chapter" data-level="4.2" data-path="visualización-de-datos-para-eda.html"><a href="visualización-de-datos-para-eda.html#gráficos-para-eda-con-variables-cuantitativas-individuales"><i class="fa fa-check"></i><b>4.2</b> Gráficos para EDA con variables cuantitativas individuales</a></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="gráficos-para-eda-multivariante.html"><a href="gráficos-para-eda-multivariante.html"><i class="fa fa-check"></i><b>5</b> Gráficos para EDA multivariante</a>
+<ul>
+<li class="chapter" data-level="5.1" data-path="gráficos-para-eda-multivariante.html"><a href="gráficos-para-eda-multivariante.html#gráficos-específicos-para-variables-categóricas"><i class="fa fa-check"></i><b>5.1</b> Gráficos específicos para variables categóricas</a></li>
+<li class="chapter" data-level="5.2" data-path="gráficos-para-eda-multivariante.html"><a href="gráficos-para-eda-multivariante.html#representación-gráfica-de-series-temporales"><i class="fa fa-check"></i><b>5.2</b> Representación gráfica de series temporales</a></li>
+<li class="chapter" data-level="5.3" data-path="gráficos-para-eda-multivariante.html"><a href="gráficos-para-eda-multivariante.html#gráficos-avanzados"><i class="fa fa-check"></i><b>5.3</b> Gráficos avanzados</a></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="transformación-de-variables.html"><a href="transformación-de-variables.html"><i class="fa fa-check"></i><b>6</b> Transformación de variables</a>
+<ul>
+<li class="chapter" data-level="6.1" data-path="transformación-de-variables.html"><a href="transformación-de-variables.html#transformaciones-para-variables-cuantitativas"><i class="fa fa-check"></i><b>6.1</b> Transformaciones para variables cuantitativas</a></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="referencias.html"><a href="referencias.html"><i class="fa fa-check"></i><b>7</b> Referencias</a>
+<ul>
+<li class="chapter" data-level="7.1" data-path="referencias.html"><a href="referencias.html#datasets"><i class="fa fa-check"></i><b>7.1</b> Datasets</a></li>
+</ul></li>
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Introducción al Análisis Exploratorio de Datos</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="header">
+<h1 class="title">Introducción al Análisis Exploratorio de Datos</h1>
+<p class="author"><em>DSLAB</em></p>
+<p class="date"><em>Nov. de 2022</em></p>
+</div>
+<div id="introducción" class="section level1 hasAnchor" number="1">
+<h1><span class="header-section-number">1</span> Introducción<a href="introducción.html#introducción" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<p>El <strong>análisis exploratorio de datos</strong> (<em>exploratory data analysis</em> o EDA) es un conjunto de
+técnicas que permiten resumir las características más importantes de un conjunto de datos,
+normalmente con especial énfasis en el uso de métodos de visualización gráfica.</p>
+<p>El término fue popularizado, entre otros, por el estadístico norteamericano John W. Tukey (1915-2000), a
+través de su libro <em>Exploratory Data Analysis</em> (1977) como método para descubrir informacion
+importante o valiosa contenida en los datos que no se pueda anticipar o no sea evidente.
+Esta aproximación contrasta con el <strong>análisis confirmatorio de datos</strong> (<em>confirmatory data
+analysis</em> o CDA) donde normalmente buscamos comprobar la validez de una hipótesis mediante la aplicación
+de técnicas estadísticas sobre los datos (<em>inferencia estadística</em>).</p>
+<p>Aunque tradicionalmente la Estadística ha volcado su interés en el análisis confirmatorio de datos,
+las nuevas técnicas computacionales de tratamiento y visualización de datos han permitido grandes
+avances en el EDA. En particular, R nos proporciona una gran cantidad de herramientas para efectuar
+el EDA con diferentes tipos de datos.</p>
+<div id="variables-cualitativas-y-cuantitativas" class="section level2 hasAnchor" number="1.1">
+<h2><span class="header-section-number">1.1</span> Variables cualitativas y cuantitativas<a href="introducción.html#variables-cualitativas-y-cuantitativas" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>En estadística, existe un debate intenso pero poco conocido sobre cómo debemos clasificar los diferentes
+tipos de variables y escalas de medida que podemos usar para caracterizar la realidad que
+vamos a analizar [Hand, 1996]. Por ejemplo, Stevens (1946, 1951) propuso una clasificación de escalas
+de medida desde el campo de las ciencias sociales y del comportamiento. Sin embargo, otros autores
+posteriores criticaron esta clasificación y propusieron otras alternativas, por ejemplo Mosteller y Tukey
+(1977) o Chrisman (1997).</p>
+<p>Puesto que no existe un consenso bien definido sobre este tema, a continuación se presenta una clasificación
+pragmática de tipos de variables, basada en la práctica de métodos y técnicas estadísticas comunmente
+aplicados. Su filosofía sigue, en cierto modo, la orientación propuesta por Mosteller y Tukey.</p>
+<p><strong>Variable cualitativa</strong> (también llamada <strong>categórica</strong> o <strong>atributo</strong>) es aquella que refleja una cualidad
+de la realidad o elemento observado y, por tanto, su valor no se representa mediante un número. Por ejemplo,
+la respuesta a una pregunta (<code>Sí</code> o <code>No</code>), el estado civil (<code>soltero</code>, <code>casado</code>, <code>divorciado</code>, <code>viudo</code>, etc.)
+o el tipo sanguíeno.</p>
+<p>A su vez, las variables cualitativas pueden ser <strong>dicótomas</strong> o <strong>polítomas</strong>. Una variable cualitativa es
+<strong>dicótoma</strong> cuando solo puede tomar dos posibles valores, por ejemplo (<code>Sí</code> o <code>No</code>). Una variable cualitativa
+es <strong>polítoma</strong> cuando puede tomar valores en más de dos posibles categorías, por ejemplo el grupo sanguíneo
+o el estado civil.</p>
+<p><strong>Variable cuantitativa</strong> es aquella cuyo valor se indica con un número, puesto que corresponde a características
+que se representan mediante cantidades. Ejemplos serían la temperatura en ºC, el peso en kg., el tiempo en
+seg. o un recuento de elementos.</p>
+<p>Las variables cuantitativas pueden, a su vez, ser <strong>discretas</strong> o <strong>continuas</strong>. Una variable cuantitativa
+<strong>discreta</strong> es aquella que solo puede tomar un numero finito o infinito numerable de valores (numéricos).
+El segundo ocurre cuando en un intervalo finito la variable solo puede tomar un número finito (limitado)
+de valores. Un ejemplo serían los números naturales, puesto que para un intervalo finito como [1,4] solo
+puede tomar los valores {1, 2, 3, 4} (y ningún valor entre estos). Por tanto, una variable que contenga
+un <em>recuento</em> siempre es un caso de variable cuantitativa discreta (su valor es 0 o un número entero
+positivo).</p>
+<p>Una variable cuantitativa <strong>continua</strong>
+es la que puede tomar infinitos valores numéricos en un intervalo finito, por ejemplo los números reales
+en el intervalo [1,4]. Otros ejemplos serían magnitudes físicas comom peso, altura, tiempo, etc. En la
+práctica, al final siempre se impone un límite de precisión al medir una variable cuantitativa continua,
+porque no podemos medir una magnitud con infinitos decimales.</p>
+<p>Además, existen <a href="http://psych.colorado.edu/~carey/qmin/qminChapters/Chapter03A.pdf">algunas otras consideraciones</a>
+que conviene tener en cuenta para caracterizar nuestras variables :</p>
+<ul>
+<li><p>Una variable <strong>acotada</strong> es aquella que solo toma valores dentro de un intervalo y no está definidas
+(matemáticamente) fuera del mismo. Un ejemplo es un recuento, que tiene un límite inferior de 0 (o hay algún
+elemento o no hay ninguno) o un porcentaje (acotado entre 0 y 100).</p></li>
+<li><p>Una variable <em>cuantitativa</em> ha sido <strong>dicotomizada</strong> cuando su escala cuantitativa se ha dividido en solo
+dos clases separadas por un valor de corte. Un ejemplo serían los valores de corte que se escogen en medicina
+para la presión sanguínea o el colesterol con el fin de diagnosticar hipertensión o hipercolesterolemia (el
+resultado es <code>Sí</code> o <code>No</code> dependiendo de si el valor medido cae por encima o por debajo del valor de corte entre
+los dos grupos). Una variable <em>cuantitativa</em> ha sido <strong>politomizada</strong> si se eligen varios valores de corte para
+separar su escala cuantitativa original en más de dos grupos.</p></li>
+</ul>
+<p>En R podemos dividir una variable cuantitativa en intervalos mediante la función <code>cut</code>, o también mediante
+la función <code>Hmisc::cut2</code>, más potente y flexible que la primera.</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="introducción.html#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(Hmisc)</span>
+<span id="cb2-2"><a href="introducción.html#cb2-2" aria-hidden="true" tabindex="-1"></a>disp_cut <span class="ot">&lt;-</span> <span class="fu">cut2</span>(mtcars<span class="sc">$</span>disp, <span class="at">g =</span> <span class="dv">3</span>)</span>
+<span id="cb2-3"><a href="introducción.html#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="fu">table</span>(disp_cut)</span></code></pre></div>
+<pre><code>## disp_cut
+## [ 71.1,147) [146.7,304) [304.0,472] 
+##          11          11          10</code></pre>
+<p>Esta técnica (también conocida en inglés como <em>binning</em> o <em>bucketing</em>) se utiliza por ejemplo al representar el
+<a href="#graficos-para-eda-con-variables-cuantitativas-individuales">histograma</a>, puesto que se divide la variable
+en intervalos para su representación gráfica.</p>
+<p>Debemos tener precaución cuando usemos variables dicotomizadas o politomizadas, puesto que la elección de los
+puntos de corte puede desvirtuar los resultados de nuestro análisis. Como norma general, <em>siempre que sea posible</em>
+deberíamos utilizar <em>variables cuantitativas en su escala original</em> en nuestro análisis y evitar convertirlas en
+categóricas.</p>
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+
+<a href="escalas-de-medida.html" class="navigation navigation-next navigation-unique" aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"whatsapp": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": null,
+"text": null
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": null,
+"search": false,
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/latest.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>
